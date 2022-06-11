@@ -10,23 +10,16 @@ import java.util.HashMap;
 
 public class LongestSubstringWithoutRepeatingCharacters {
     public int lengthOfLongestSubstring(String s) {
-        int max = 0, start = 0;
+        int max = 0, left = 0;
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
-            Integer lastIndex = map.get(s.charAt(i));
-            if (lastIndex != null) {
-                if (max == 0) {
-                    max = i;
-                }
-                while (s.charAt(start) != s.charAt(i)) {
-                    start++;
-                }
-
-                max = Math.max(max, i - start);
+            if (map.containsKey(s.charAt(i))) {
+                left = Math.max(left, map.get(s.charAt(i)) + 1);
             }
             map.put(s.charAt(i), i);
+            max = Math.max(max, i - left + 1);
         }
-        return Math.max(max, s.length() - start);
+        return max;
     }
 
     public static void main(String[] args) {
