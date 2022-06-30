@@ -7,6 +7,15 @@ public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode();
 
+        while (l1.next != null) {
+            int sum = l1.val+l2.val;
+            ListNode next = new ListNode();
+            head.val = sum;
+            next = new ListNode();
+            head.next = next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
         return head;
     }
 }
